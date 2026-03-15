@@ -1,8 +1,8 @@
-﻿# ohos_ui 📱
+﻿# OhosUI 📱
 
 **ohos_ui** 是一个致力于在 Flutter 中还原 HarmonyOS (OpenHarmony) 原生 UI 风格与交互体验的组件库。
 > ⚠️ **注意**：目前项目处于早期开发阶段，仅实现了极少部分的 UI 特性与基础交互效果。
-> 
+
 ## ✨ 特性 (Features)
 目前主要包含以下核心组件与效果：
 
@@ -28,8 +28,10 @@ dependencies:
 
 ### 实现点击缩放效果
 为任意 Widget 添加鸿蒙风格的按压反馈：
-`dart
+
+```dart
 import 'package:ohos_ui/effect.dart';
+
 HarmonyPressEffect(
   pressedScale: 0.9, // 自定义按下时的缩放比例，默认为 0.85
   onTap: () {
@@ -46,10 +48,12 @@ HarmonyPressEffect(
     child: Text("点击我体验效果", style: TextStyle(color: Colors.white)),
   ),
 );
-`
+```
+
 ### 使用圆形图标按钮
-`dart
+```dart
 import 'package:ohos_ui/button/icon.dart';
+
 HarmonyIconButton(
   iconName: "chevron_left", // 支持 'chevron_left', 'xmark' 等
   size: 24, // 图标大小
@@ -57,7 +61,7 @@ HarmonyIconButton(
     Navigator.of(context).pop();
   },
 );
-`
+```
 
 ## 🗓️ 开发计划 (Roadmap)
 我们计划逐步实现以下内容：
