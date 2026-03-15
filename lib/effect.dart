@@ -23,25 +23,16 @@ class HarmonyPressEffect extends StatefulWidget {
 class _HarmonyPressEffectState extends State<HarmonyPressEffect> {
   double scale = 1.0;
 
-  void _onTapDown(TapDownDetails details) {
-    setState(() => scale = widget.pressedScale);
-  }
-
-  void _onTapUp(TapUpDetails details) {
-    setState(() => scale = 1.0);
-    widget.onTap?.call();
-  }
-
-  void _onTapCancel() {
-    setState(() => scale = 1.0);
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTapDown: _onTapDown,
-      onTapUp: _onTapUp,
-      onTapCancel: _onTapCancel,
+      onTapDown: (_) => setState(() => scale = widget.pressedScale),
+      onTapCancel: () => setState(() => scale = 1),
+      onTapUp: (_) async {
+        await Future.delayed(const Duration(milliseconds: 70));
+        if (mounted) setState(() => scale = 1);
+        widget.onTap?.call();
+      },
       child: AnimatedScale(
         scale: scale,
         duration: widget.duration,
