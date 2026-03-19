@@ -1,39 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../effect.dart';
 
-class HarmonyIconButton extends StatelessWidget {
+class HarmonyIconButton extends StatefulWidget {
   final VoidCallback? onTap;
   final String iconName;
   final Color backgroundColor;
-  final double size;
+  final double buttonSize,iconSize;
 
   const HarmonyIconButton({
     super.key,
     this.onTap,
     this.iconName = "xmark",
     this.backgroundColor = const Color(0xffe7e8ea),
-    this.size = 24,
+    this.iconSize = 24,
+    this.buttonSize = 40,
   });
 
   @override
+  State<HarmonyIconButton> createState() => _HarmonyIconButtonState();
+}
+
+class _HarmonyIconButtonState extends State<HarmonyIconButton> {
+  bool _isPressed = false;
+
+  @override
   Widget build(BuildContext context) {
-    return HarmonyPressEffect(
-      onTap: onTap,
+    return GestureDetector(
+      onTapDown: (_) => setState(() => _isPressed = true),
+      onTapUp: (_) => setState(() => _isPressed = false),
+      onTapCancel: () => setState(() => _isPressed = false),
+      onTap: widget.onTap,
       child: Center(
         child: Container(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: backgroundColor,
+            color: _isPressed
+                ? Color.lerp(widget.backgroundColor, Colors.black, 0.1)
+                : widget.backgroundColor,
           ),
-          width: size + 16,
-          height: size + 16,
+          width: widget.buttonSize,
+          height: widget.buttonSize,
           alignment: Alignment.center,
           child: SvgPicture.asset(
-            "res/icons/$iconName.svg",
+            "res/icons/${widget.iconName}.svg",
             package: "ohos_ui",
-            width: size,
-            height: size,
+            width: widget.iconSize,
+            height: widget.iconSize,
           ),
         ),
       ),

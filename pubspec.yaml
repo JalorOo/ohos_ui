@@ -1,11 +1,11 @@
 name: ohos_ui
-description: "A Flutter HarmonyOS-style component library."
+description: "A Flutter HarmonyOS-style component library. You can use it to quickly build a HarmonyOS-style application just use Flutter. Now it is developing, welcome to join us!"
 version: 0.0.1
 homepage: https://github.com/JalorOo/ohos_ui
 repository: https://github.com/JalorOo/ohos_ui
 
 environment:
-  sdk: ^3.5.3
+  sdk: ^3.4.0
   flutter: ">=1.17.0"
 
 dependencies:
