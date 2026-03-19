@@ -20,19 +20,21 @@ class HarmonyIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return HarmonyPressEffect(
       onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: backgroundColor,
-        ),
-        width: size + 16,
-        height: size + 16,
-        alignment: Alignment.center,
-        child: SvgPicture.asset(
-          "res/icons/$iconName.svg",
-          package: "ohos_ui",
-          width: size,
-          height: size,
+      child: Center(
+        child: Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: backgroundColor,
+          ),
+          width: size + 16,
+          height: size + 16,
+          alignment: Alignment.center,
+          child: SvgPicture.asset(
+            "res/icons/$iconName.svg",
+            package: "ohos_ui",
+            width: size,
+            height: size,
+          ),
         ),
       ),
     );
