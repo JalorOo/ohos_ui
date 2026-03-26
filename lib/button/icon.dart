@@ -5,13 +5,15 @@ class HarmonyIconButton extends StatefulWidget {
   final VoidCallback? onTap;
   final String iconName;
   final Color backgroundColor;
+  final Color darkBackgroundColor;
   final double buttonSize,iconSize;
 
   const HarmonyIconButton({
     super.key,
     this.onTap,
     this.iconName = "xmark",
-    this.backgroundColor = const Color(0xffe7e8ea),
+    this.backgroundColor = const Color(0xfff4f6f5),
+    this.darkBackgroundColor = const Color(0xff2d2f2e),
     this.iconSize = 24,
     this.buttonSize = 40,
   });
@@ -25,6 +27,12 @@ class _HarmonyIconButtonState extends State<HarmonyIconButton> {
 
   @override
   Widget build(BuildContext context) {
+    var color = widget.backgroundColor;
+    if (
+    Theme.of(context).brightness == Brightness.dark) {
+      color = widget.darkBackgroundColor;
+    }
+
     return GestureDetector(
       onTapDown: (_) => setState(() => _isPressed = true),
       onTapUp: (_) => setState(() => _isPressed = false),
@@ -35,8 +43,8 @@ class _HarmonyIconButtonState extends State<HarmonyIconButton> {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: _isPressed
-                ? Color.lerp(widget.backgroundColor, Colors.black, 0.1)
-                : widget.backgroundColor,
+                ? Color.lerp(color, Colors.black, 0.1)
+                : color,
           ),
           width: widget.buttonSize,
           height: widget.buttonSize,
