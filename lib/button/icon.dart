@@ -50,6 +50,12 @@ class _HarmonyIconButtonState extends State<HarmonyIconButton> {
           height: widget.buttonSize,
           alignment: Alignment.center,
           child: SvgPicture.asset(
+            colorFilter: ColorFilter.mode(
+              Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white70
+                  : Colors.black87,
+              BlendMode.srcIn,
+            ),
             "res/icons/${widget.iconName}.svg",
             package: "ohos_ui",
             width: widget.iconSize,
