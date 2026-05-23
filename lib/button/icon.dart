@@ -6,14 +6,16 @@ class HarmonyIconButton extends StatefulWidget {
   final String iconName;
   final Color backgroundColor;
   final Color darkBackgroundColor;
-  final double buttonSize,iconSize;
+  final Color? iconColor;
+  final double buttonSize, iconSize;
 
   const HarmonyIconButton({
     super.key,
     this.onTap,
     this.iconName = "xmark",
     this.backgroundColor = const Color(0xfff4f6f5),
-    this.darkBackgroundColor = const Color(0xff2d2f2e),
+    this.darkBackgroundColor = const Color(0xff393939),
+    this.iconColor,
     this.iconSize = 24,
     this.buttonSize = 40,
   });
@@ -27,11 +29,12 @@ class _HarmonyIconButtonState extends State<HarmonyIconButton> {
 
   @override
   Widget build(BuildContext context) {
-    var color = widget.backgroundColor;
-    if (
-    Theme.of(context).brightness == Brightness.dark) {
-      color = widget.darkBackgroundColor;
-    }
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    final color = isDark ? widget.darkBackgroundColor : widget.backgroundColor;
+
+    final iconColor = widget.iconColor ??
+        (isDark ? Colors.white : Colors.black87);
 
     return GestureDetector(
       onTapDown: (_) => setState(() => _isPressed = true),
@@ -50,16 +53,14 @@ class _HarmonyIconButtonState extends State<HarmonyIconButton> {
           height: widget.buttonSize,
           alignment: Alignment.center,
           child: SvgPicture.asset(
-            colorFilter: ColorFilter.mode(
-              Theme.of(context).brightness == Brightness.dark
-                  ? Colors.white70
-                  : Colors.black87,
-              BlendMode.srcIn,
-            ),
             "res/icons/${widget.iconName}.svg",
             package: "ohos_ui",
             width: widget.iconSize,
             height: widget.iconSize,
+            colorFilter: ColorFilter.mode(
+              iconColor,
+              BlendMode.srcIn,
+            ),
           ),
         ),
       ),
